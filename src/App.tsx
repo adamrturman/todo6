@@ -9,15 +9,20 @@ function App() {
   const [list, setList] = useState<ToDo[]>([]);
 
   const addToList = (task: string) => {
-    if (task.length > 0) {
-      const additionalToDo: ToDo = {
-        text: task,
-        isCompleted: false
-      };
-      setList([additionalToDo, ...list]);
-    } else {
-      alert(`Blank entries aren't allowed`)
-    }
+      const duplicateToDos = list.filter(todo => todo.text === task);
+      if (duplicateToDos.length) {
+          alert(`Duplicate tasks not allowed - finish the first instance first!`);
+          return;
+      }
+      if (task.length) {
+          const additionalToDo: ToDo = {
+              text: task,
+              isCompleted: false
+          };
+          setList([additionalToDo, ...list]);
+      } else {
+          alert(`Blank entries aren't allowed`)
+      }
   };
 
   const deleteFromList = (index: number) => {

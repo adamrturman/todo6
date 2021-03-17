@@ -1,6 +1,7 @@
 import React from "react";
 import ToDo from "../../interfaces/ToDo";
 import Item from "../Item/Item";
+import List from "@material-ui/core/List";
 
 interface ListProps {
     list: ToDo[];
@@ -8,22 +9,24 @@ interface ListProps {
     handleComplete: (index: number) => void;
 }
 
-export default function List(props: ListProps) {
+export default function ToDoList(props: ListProps) {
 
-    const displayedList = props.list.map((toDo: ToDo, index: number) => (
+    const { list, deleteFromList, handleComplete } = props;
+
+    const displayedList = list.map((toDo: ToDo, index: number) => (
 
         <Item
             toDo={toDo}
             index={index}
             key={index}
-            deleteFromList={props.deleteFromList}
-            handleComplete={props.handleComplete}
+            deleteFromList={deleteFromList}
+            handleComplete={handleComplete}
         />
     ));
 
     return (
-        <>
+        <List>
             {displayedList}
-        </>
+        </List>
     )
 }

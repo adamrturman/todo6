@@ -1,14 +1,18 @@
 import React from "react";
+import Typography from "@material-ui/core/Typography";
 
 interface HeadingProps {
     countRemainingTodos: () => number;
 }
 
 export default function Heading(props: HeadingProps) {
+
+    const { countRemainingTodos } = props;
+
     return (
         <>
-            <h1>To Do Application #6</h1>
-            <p>There {props.countRemainingTodos() === 1 ? `is` : `are`} {props.countRemainingTodos()} {props.countRemainingTodos() === 1 ? `task` : `tasks`} remaining.</p>
+            <Typography variant="h1">To Do Application #6</Typography>
+            <Typography variant="h4">There {countRemainingTodos() === 1 ? `is` : `are`} {countRemainingTodos()} {countRemainingTodos() === 1 ? `task` : `tasks`} remaining.</Typography>
         </>
     );
 }

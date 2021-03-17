@@ -1,6 +1,10 @@
-import React, {MouseEvent} from "react";
+import React from "react";
 import ToDo from "../../interfaces/ToDo";
-import styles from "./Item.module.css"
+import styles from "./Item.module.css";
+import Typography from "@material-ui/core/Typography";
+import Checkbox from '@material-ui/core/Checkbox';
+import ListItem from '@material-ui/core/ListItem';
+import DeleteForever from '@material-ui/icons/DeleteForever';
 
 interface ItemProps {
     toDo: ToDo;
@@ -11,21 +15,19 @@ interface ItemProps {
 
 export default function Item(props: ItemProps) {
 
-    const deleteFromList = (event: MouseEvent<HTMLButtonElement>) => {
-        props.deleteFromList(props.index);
-    };
+    const { toDo, index, deleteFromList, handleComplete } = props
 
-    const toggleComplete = (event: MouseEvent<HTMLButtonElement>) => {
-        props.handleComplete(props.index);
-    };
+    const handleDelete = () => deleteFromList(index);
 
-    const itemClasses = props.toDo.isCompleted ? `${styles.completed}` : ``;
+    const toggleComplete = () => handleComplete(index);
+
+    const itemClasses = toDo.isCompleted ? `${styles.completed}` : ``;
 
     return (
-        <li>
-            <span className={itemClasses}>{props.toDo.text}</span>
-            <button onClick={deleteFromList}>Delete</button>
-            <button onClick={toggleComplete}>{props.toDo.isCompleted ? `Unmark` : `Mark`}</button>
-        </li>
+        <ListItem className={`${styles.listItem} ${styles.task}`}>
+            <Checkbox onClick={toggleComplete}></Checkbox>
+            <Typography variant="h6" className={itemClasses}>{toDo.text}</Typography>
+            <DeleteForever onClick={handleDelete}>Delete</DeleteForever>
+        </ListItem>
     );
 }

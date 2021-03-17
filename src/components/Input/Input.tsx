@@ -1,4 +1,6 @@
 import React, {ChangeEvent, useState} from "react";
+import TextField from "@material-ui/core/TextField";
+import Button from "@material-ui/core/Button";
 
 interface InputProps {
     addToList: (task: string) => void;
@@ -7,19 +9,21 @@ interface InputProps {
 export default function Input(props: InputProps) {
     const [task, setTask] = useState('');
 
+    const { addToList } = props;
+
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setTask(event.target.value);
     };
 
     const handleAddition = () => {
-        props.addToList(task);
+        addToList(task);
         setTask('');
     };
 
     return (
         <>
-            <input value={task} onChange={handleChange}/>
-            <button onClick={handleAddition}>Add</button>
+            <TextField label="ToDo" variant="outlined" value={task} onChange={handleChange}/>
+            <Button variant="contained" onClick={handleAddition}>Add</Button>
         </>
     );
 }
