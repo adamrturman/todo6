@@ -22,7 +22,10 @@ export default function Input(props: InputProps) {
 
     return (
         <>
-            <TextField label="ToDo" variant="outlined" value={task} onChange={handleChange}/>
+            <div>
+                <label htmlFor="new-todo">What do you need to do?</label>
+            </div>
+            <TextField id="new-todo" label="ToDo" variant="outlined" value={task} onChange={handleChange}/>
             <Button variant="contained" onClick={handleAddition}>Add</Button>
         </>
     );

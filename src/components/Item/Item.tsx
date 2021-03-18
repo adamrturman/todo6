@@ -15,16 +15,17 @@ interface ItemProps {
 
 export default function Item(props: ItemProps) {
 
-    const { toDo, index, deleteFromList, handleComplete } = props
+    const { toDo, index, deleteFromList, handleComplete } = props;
+    const { completed, listItem, task } = styles;
 
     const handleDelete = () => deleteFromList(index);
 
     const toggleComplete = () => handleComplete(index);
 
-    const itemClasses = toDo.isCompleted ? `${styles.completed}` : ``;
+    const itemClasses = toDo.isCompleted ? `${completed}` : ``;
 
     return (
-        <ListItem className={`${styles.listItem} ${styles.task}`}>
+        <ListItem className={`${listItem} ${task}`}>
             <Checkbox onClick={toggleComplete}></Checkbox>
             <Typography variant="h6" className={itemClasses}>{toDo.text}</Typography>
             <DeleteForever onClick={handleDelete}>Delete</DeleteForever>
